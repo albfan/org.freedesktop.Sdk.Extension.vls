@@ -1,0 +1,19 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2018-2019 Mat Booth <mat.booth@redhat.com> -->
+<component type="runtime">
+  <id>org.freedesktop.Sdk.Extension.vls</id>
+  <metadata_license>GPL-3.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <name>Vala language server Extension</name>
+  <summary>The Vala language server</summary>
+  <description>
+    <p>
+      This SDK extension allows the use of Language server for Vala.
+    </p>
+  </description>
+  <url type="homepage">https://github.com/albfan/org.freedesktop.Sdk.Extension.vls</url>
+  <url type="bugtracker">https://github.com/albfan/org.freedesktop.Sdk.Extension.vls/issues</url>
+  <developer_name>Alberto Fanjul</developer_name>
+  <update_contact>albfan@gnome.org</update_contact>
+</component>

@@ -1,0 +1,18 @@
+diff --git i/meson.build w/meson.build
+index e70dccc5..ff684205 100644
+--- i/meson.build
++++ w/meson.build
+@@ -28,9 +28,12 @@ deps = [
+     valac.find_library('posix'),
+ ]
+ 
++vapi_dir = [join_paths(get_option('prefix'), get_option('datadir'), 'vala', 'vapi')]
++project_arguments = ['--vapidir', vapi_dir]
+ if libjsonrpc_glib_dep.version() >= '3.30'
+-  add_project_arguments(['--define=WITH_JSONRPC_GLIB_3_30'], language: 'vala')
++  project_arguments += ['--define=WITH_JSONRPC_GLIB_3_30']
+ endif
++  add_project_arguments(project_arguments, language: 'vala')
+ 
+ if get_option('debug_mem')
+   libgobject_list_proj = subproject('gobject-list-prince781')

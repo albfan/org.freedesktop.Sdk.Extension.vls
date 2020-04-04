@@ -1,0 +1,77 @@
+{
+    "id": "org.freedesktop.Sdk.Extension.vls",
+    "branch": "19.08",
+    "runtime": "org.gnome.Sdk",
+    "runtime-version": "master",
+    "build-extension": true,
+    "sdk": "org.gnome.Sdk",
+    "separate-locales": false,
+    "appstream-compose": false,
+    "build-options": {
+        "no-debuginfo": true,
+        "strip": true,
+        "prefix": "/usr/lib/sdk/vls",
+        "append-path": "/usr/lib/sdk/vls/bin",
+        "append-pkg-config-path": "/usr/lib/sdk/vls/lib/pkgconfig",
+        "append-ld-library-path": "/usr/lib/sdk/vls/lib",
+        "env": {
+            "V": "1"
+        }
+    },
+    "modules": [
+        {
+            "name" : "jsonrpc-glib",
+            "config-opts" : [
+                "--libdir=/usr/lib/sdk/vls/lib",
+                "--buildtype=debugoptimized"
+            ],
+            "buildsystem" : "meson",
+            "builddir" : true,
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/jsonrpc-glib.git"
+                }
+            ]
+        },
+        {
+            "name" : "vala-language-server",
+            "config-opts" : [
+                "--libdir=/usr/lib/sdk/vls/lib",
+                "--buildtype=debugoptimized",
+		"-Dbuilder_abi=3.37"
+            ],
+            "buildsystem" : "meson",
+            "builddir" : true,
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/benwaffle/vala-language-server"
+                },
+		{
+		    "type": "patch",
+		    "path": "vala-language-server_Avoid-to-run-from-host-for-flatpak.patch"
+		},
+		{
+		    "type": "patch",
+		    "path": "fix_vapidir.patch"
+		}
+            ]
+        },
+        {
+            "name": "appdata",
+            "buildsystem": "simple",
+            "build-commands": [
+                "mkdir -p ${FLATPAK_DEST}/share/metainfo",
+                "cp org.freedesktop.Sdk.Extension.vls.appdata.xml ${FLATPAK_DEST}/share/metainfo",
+                "appstream-compose --basename=org.freedesktop.Sdk.Extension.vls --prefix=${FLATPAK_DEST} --origin=flatpak org.freedesktop.Sdk.Extension.vls"
+            ],
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "org.freedesktop.Sdk.Extension.vls.appdata.xml"
+                }
+            ]
+        }
+    ]
+}
