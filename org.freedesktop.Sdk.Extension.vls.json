@@ -41,6 +41,9 @@
                 "--buildtype=debugoptimized",
 		"-Dbuilder_abi=3.37"
             ],
+            "cleanup" : [
+                "/lib/gnome-builder"
+            ],
             "buildsystem" : "meson",
             "builddir" : true,
             "sources" : [
